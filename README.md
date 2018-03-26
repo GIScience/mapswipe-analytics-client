@@ -1,0 +1,1 @@
+# mapswipe-analytics-client
