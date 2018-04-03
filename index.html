@@ -1,0 +1,443 @@
+<!doctype html>
+<html class="no-js" lang="">
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>GIScience MapSwipe Analytics</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="http://www2.geog.uni-heidelberg.de/media/favicon.ico?v=2" rel="shortcut icon">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <!-- <link rel="stylesheet" href="css/main.css"> -->
+        <link rel="stylesheet" href="css/aStyle.css">
+        <link rel="stylesheet" href="css/leaflet.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/c3.css"> -->
+
+        <!-- <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script> -->
+        <!-- <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script> -->
+
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.ajax.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="js/bing.min.js"></script>
+        <script src="js/L.TileLayer.BetterWMS.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <!-- <script src="js/c3.min.js"></script> -->
+        <script src="js/analytics.js"></script>
+
+    </head>
+    <body onload="show_map()">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a href= "http://mapswipe.heigit.org/"><img src="img/mapswipe-logoAnalytics.png" height="70px"></a>
+
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="navBar">
+
+          <ul class="nav navbar-nav">
+            <!-- <li><a href="http://www.geog.uni-heidelberg.de/gis/heigit_en.html" target="_blank"><img  src="img/heigit_logo.png" height="70px"></a></li> -->
+          </ul>
+          <ul class ="nav navbar-nav navbar-right">
+
+
+          <form id="TableSearchField" class="navbar-form navbar-left" style="display: none">
+          <input id="myInput2" onkeyup="searchTable()" type="text" class="form-control input-lg" placeholder="Search..." style = "width: 380px;">
+          </form>
+
+          <div id="MapSearchField" style="z-index: 1200; height: 100%;  max-height: 80px; position: relative; display: none;  " class="navbar-form navbar-left">
+            <div id="leaflet-control-search" class="form-group" style = "height: 100%; max-height: 80px;">
+            <input  id="myInput" type="text" class="form-control input-lg" placeholder="Search..." style = "height: 100%; max-height: 110px; width: 380px;">
+            </div>
+          </div>
+
+          <li><button id="LiveBtn" onclick = "openLive()" title = "View the results of the latest contributions" class="btn btn-primary btn-lg navbar-btn" style="display: block; margin-right: 10px; width: 150px; background-color: green;"><i class="fa fa-play-circle" aria-hidden="true"></i> Live </button></li>
+          <li><button id="MapViewBtn" onclick="showMapView()" class="btn btn-primary btn-lg navbar-btn" style="display: none; margin-right: 10px; width: 150px"><i class="fa fa-exchange" aria-hidden="true"></i> Map View</button></li>
+          <li><button id="TableViewBtn" onclick="showTableView()" class="btn btn-primary btn-lg navbar-btn" style="margin-right: 10px; width: 150px"><i class="fa fa-exchange" aria-hidden="true"></i> Table View</button></li>
+          <li><button id="ContributeBtn" onclick="showContribute()" class="btn btn-primary btn-lg navbar-btn" style="display: block; margin-right: 10px; width: 150px">Contribute</button></li>
+
+          <li><button id="ContactBtn" href="#" onclick="showContactView()" class="btn btn-primary btn-lg navbar-btn" style="margin-right: 10px; width: 150px">Info & Contact</button></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+		<div class="col-md-12" id="table_view" style="display: None;padding: 25px;background: white; height: calc(100vH - 92px); overflow: scroll">
+			<table id="myTable2" style="width: 100%" class="table table-striped table-hover">
+			  <tr class="thead-inverse">
+				<th onclick="sortTable(0)">ID</th>
+				<th onclick="sortTable(1)">Name</th>
+				<th onclick="sortTable(2)">Status</th>
+				<th onclick="sortTable(3)">Progress</th>
+				<th onclick="sortTable(3)">Contributors</th>
+				<th onclick="sortTable(3)">Look for</th>
+				<th>Download Data</th>
+				<th>Last Check</th>
+			  </tr>
+			</table>
+			<p> </p>
+		</div>
+
+
+		<div class="col-md-12" id="contact" style="display: None; padding: 25px; background: white; height: calc(100vH - 92px); overflow: scroll">
+			<h3>Info & Feedback</h3>
+			<p>MapSwipe Analytics is a website that brings together everything related to MapSwipe projects. This includes a visualisation of the results (e.g. settlement layer), but also additional characteristics like agreement among volunteers, which is an important indicator for quality. Furthermore, you can monitor the progress of individual MapSwipe projects. Please note that <b>we are still in the beta mode</b>. We are working on improving the design as well as the analytical features. Your feedback is always welcome. <a href="https://gitlab.gistools.geog.uni-heidelberg.de/giscience/mapswipe/MapSwipeAnalytics" target="blank">Just post an issue to our GitLab repository.</a></p>
+			<p> </p>
+			<p><b>Looking for processed MapSwipe data?</b> Here you go! <a href="http://mapswipe.heigit.org/processing/data/">MapSwipe Data Repository </a></p>
+			<p> </p>
+			<p>We also provide you with the tools (written in python) to process the data on your own. This gives you the possibility to download and process MapSwipe data at any time and as often as you like. As we are trying to improve the scripts step by step, have a look at the <a href="https://gitlab.com/giscience/MapSwipe/MapSwipeTools">GitLab repo</a> and always get the latest version.</p>
+
+			<p>You can find more information related to MapSwipe at <a href="http://mapswipe.org/" target="blank">mapswipe.org</a> and the <a href="http://k1z.blog.uni-heidelberg.de/?s=MapSwipe" target="blank">GIScience News Blog</a>.
+			<p> </p>
+      <b>Further information: </b><br>
+        <i style = "font-variant: small-caps; font-style: normal;">De Albuquerque, J.P.; Herfort, B.; Eckle, M. </i> (2016) : <a href="http://www.mdpi.com/2072-4292/8/10/859" target="_blank"> Tasks of the Crowd: A Typology of Tasks in Geographic Information Crowdsourcing and a Case Study in Humanitarian Mapping.</a>
+         <i style="font-style: italic;"> Remote Sensing. </i> 2016, 8(10), 859.
+			<h3>Acknowledgements</h3>
+			<p>This work has kindly been supported by the Klaus Tschira Foundation (KTS) Heidelberg in the context of establishing the Heidelberg Institute for Geoinformation Technology (HeiGIT).</p>
+
+			<p> </p>
+
+			<h3>Contact</h3>
+			<img style="float: left;margin-right: 10px;" src="img/heigit_logo_big.png" height="60px">
+        Heidelberg Institute for Geoinformation Technology <br>
+        Department of Geography, Chair of GIScience<br>
+				Heidelberg University, Germany
+				<p style="clear: both;">
+					<a href="http://www.geog.uni-heidelberg.de/gis/heigit_en.html" target="_blank">http://www.geog.uni-heidelberg.de/gis/heigit_en.html</a>
+					<br><br>
+					Email:
+					<br>
+					herfort[at]uni-heidelberg.de
+				</p>
+				<p>This Website was created by Marcel Reinmuth, Benjamin Herfort and Michael Dollinger. Special Thanks go to Jess Cahill for the work on improving the design. </p>
+		</div>
+
+
+
+
+		<div class="col-md-4" id="analytics" style=" display: none; z-index: 990; background: white; ">
+
+
+
+      <div id = "overallStats" style = "display: block;">
+        <div id="hide_details_btn" style=" display: block;">
+        <button onclick="hideAnalyticsDiv()" class="btn btn-lg"   style=" background-color: white; position: absolute;  top: 0px; right: 0px; height: 30px; width: 15px;  z-index: 997;">
+          <i class="fa fa-times" aria-hidden="true" style="position: relative; top: -8px; right: 7px;" ></i>
+        </button>
+      </div>
+
+        <br>
+        <br>
+        <div class="tab">
+          <button id = "about_tab" class="tablinks active" onclick="openTab(event, 'About')">About</button>
+          <button id = "statistics_tab" class="tablinks" onclick="openTab(event, 'statistics')">Statistics</button>
+        </div>
+
+        <div id="About" class="tabcontent " style = "display: block">
+          <!-- <h2>About</h2> -->
+          <p style="text-align: justify;">Humanitarian organizations can't help people if they can't find them. MapSwipe is a mobile app that lets you search satellite imagery to help put the world's most vulnerable people on the map. <br>
+            <br>
+          This site offers an overview over the mapswipe projects and access to the data. Click on a project on the map to see details!</p>
+            <br>
+            <div class ="col-md-6">
+              <a href="http://www.missingmaps.org/" title = "Missing Maps" target="_blank"><img  src="img/mm-logo.jpg" class = "imgDump"></a>
+            </div>
+            <div class ="col-md-6">
+              <a href="http://mapswipe.org/" target="_blank"><img  src="img/mapswipe.PNG" style="height: 70px; width: 70px; display: block; margin: auto;" ></a>
+            </div>
+
+          <p class="subtitle fancy"><span></span></p>
+
+          <a href="http://www.geog.uni-heidelberg.de/gis/heigit_en.html" title = "Heidelberg Institute for Geoinformation Technology" target="_blank"><img  src="img/heigit_logo.png" class = "imgDump"></a>
+
+          <p class="subtitle fancy"><span></span></p>
+          <div class ="col-md-4">
+            <a href="http://www.msf.org/" target="_blank"><img title = "Medicins sans Frontieres"  src="img/msf-logo.png" class = "imgDump"></a>
+          </div>
+          <div class ="col-md-4">
+            <a href="http://www.redcross.org.uk/" target="_blank"><img title="British Red Cross" src="img/brc-logo.png" class = "imgDump"></a>
+          </div>
+          <div class ="col-md-4">
+           <a href="https://www.hotosm.org/" target="_blank"><img title = "Humanitarian OpenStreetMap Team" src="img/hot-logo.png" class = "imgDump"></a>
+         </div>
+          <p class="subtitle fancy"><span></span></p>
+          <div class ="col-md-6 ">
+            <a href="https://itunes.apple.com/us/app/mapswipe/id1133855392?ls=1&mt=8" title = "Mapswipe at the App Store" target="_blank"><img class="imgDump" src="img/appstore.png" style = "height: 40px; width: 120px;"></a>
+          </div>
+          <div class = "col-md-6">
+            <a href="https://play.google.com/store/apps/details?id=org.missingmaps.mapswipe"  title = "Mapswipe at Google Play" target="_blank"><img class="imgDump" src="img/googleplay.png" style = "height: 40px; width: 120px;"></a>
+          </div>
+          <br>
+          <br>
+        </div>
+
+        <div id="statistics" class="tabcontent">
+
+          <!-- <h2 id="stats_head">
+            Mapswipe Statistics
+          </h2> -->
+          <div id ="stats_body">
+
+            <table id = "statTable" style="overflow-x: hidden; width: 100%" class="statTable">
+              <caption>Projects</caption>
+             <tr>
+               <td>Finished Projects</td>
+               <td id = "project_finished" class = "int">-</td>
+             </tr>
+             <tr>
+               <td>Inactive Projects</td>
+               <td id = "project_inactive" class = "int">-</td>
+             </tr>
+             <tr>
+               <td>Active Projects</td>
+               <td id = "project_active" class = "int">-</td>
+             </tr>
+             <tr>
+               <td>Number of Projects</td>
+               <td id = "project_total" class = "int">-</td>
+             </tr>
+           </table>
+           <br>
+           <table style="overflow-x: hidden; width: 100%" class="statTable">
+               <caption>Area (km²)</caption>
+             <tr>
+               <td>Area covered</td>
+               <td id = "area_covered" class = "float3">-</td>
+             </tr>
+             <tr>
+               <td>Largest Project Area</td>
+               <td id = "area_large" class = "float3">-</td>
+             </tr>
+             <tr>
+               <td>Smallest Project Area</td>
+               <td id = "area_small" class = "float3">-</td>
+             </tr>
+           </table>
+           <br>
+             <table style="overflow-x: hidden; width: 100%" class="statTable">
+               <caption>Users</caption>
+             <tr>
+               <td>Total Users</td>
+               <td id = "user_total" class = "int">-</td>
+             </tr>
+             <tr>
+               <td>Average Users per Project</td>
+               <td id = "user_average" class = "float3">-</td>
+             </tr>
+           </table>
+
+        </div>
+        </div>
+        <button id="facebook_btn" onclick = "share_facebook()" class = "socialButton btn btn-primary ">
+          <i class="fa fa fa-facebook" aria-hidden="true" style="position: absolute; bottom: 5px; right: 10px;"></i>
+        </button>
+        <button id="twitter_btn" onclick = "share_twitter()" class = "socialButton btn btn-primary " >
+          <i class="fa fa fa-twitter" aria-hidden="true" style="position: absolute; top: 5px; right: 7px;"></i>
+        </button>
+            </div>
+            <div id = "projectDetails" style = "display: none; width: 100%">
+              <div id="hide_details_btn" style=" display: block;">
+              <button   onclick="hideAnalyticsDiv()" class="btn btn-lg"   style=" background-color: white; position: absolute;  top: 0px; right: 0px; height: 30px; width: 15px;  z-index: 997;">
+                <i class="fa fa-times" aria-hidden="true" style="position: relative; top: -8px; right: 7px;" ></i>
+              </button>
+            </div>
+              <br>
+              <br>
+              <h2 id="ProjectName">
+                ProjectName
+              </h2>
+              <div class="tab">
+                <button id = "details_tab" class="tablinks active" onclick="openTab(event, 'details')">Project Details</button>
+                <button id = "download_tab" class="tablinks" onclick="openTab(event, 'download')">Download Data</button>
+              </div>
+
+              <div id="details" class="tabcontent " style = "display: block">
+
+                <div id = "projectDetails" style = "display: block; width: 100%">
+
+
+                  <h3>State: <span id="ProjectState">Finished</span></h3>
+
+                  <h3>Progress:</h3>
+                    <div class="progress" style="height: 20px">
+                      <div id="progress_bar" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"  value="60" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;height: 20px">
+                        <span id="progress_span" style="color: black">60%</span>
+                      </div>
+                    </div>
+
+                  <h3>Contributors: <span id="ProjectContributors">ProjectContributors</span></h3>
+
+                  <h3>Description:</h3>
+                  <p id="ProjectDescription">ProjectDescription</p>
+                  <p> </p>
+                </div>
+              </div>
+
+            <div id="download" class="tabcontent">
+
+              <div id = "downloadMenu" style = "display: block; width: 100%;">
+                    <table style="width:100%" id = "downloadSelect">
+                     <tr>
+                       <th></th>
+                       <th>Name</th>
+                       <th>Fileformat</th>
+                       <th>Description </th>
+                     </tr>
+                     <tr>
+                       <td><img src="img/final_gj.png" class = "tableImg"></td>
+
+                       <td><a id = "final" href="" downlaod = "final" target="_blank">Final</td>
+                       <td>Geojson</td>
+                       <td>Processed Results for use in HOT Tasking Manager</td>
+                     </tr>
+                     <tr>
+                       <td><img src="img/yes_maybe.png" class = "tableImg"></td>
+                       <td><a id = "yes_maybe" href="" target="_blank">Yes Maybe</td>
+                       <td>Geojson</td>
+                       <td>Majority of answers is 'yes' or 'maybe'</td>
+                     </tr>
+                     <tr>
+                       <td><img src="img/badImage.png" class = "tableImg"></td>
+
+                       <td><a id = "badImagery" href="" target="_blank">Bad imagery</td>
+                       <td>Geojson</td>
+                       <td>Majority of answers is 'bad image'</td>
+                     </tr>
+                     <tr>
+                       <td>{ ... }</td>
+
+                       <td><a id = "results" href="" target="_blank">Results</td>
+                       <td>Geojson</td>
+                       <td>Results of the project including: User, cell, result, timestamp</td>
+                     </tr>
+
+                    </table>
+              </div>
+            </div>
+            <!-- <p> </p> -->
+            <div>
+              <!-- <button onclick="window.open('http://tasks.hotosm.org/?sort_by=priority&direction=asc&search=MapSwipe')" class="btn btn-danger btn-lg" style="position: relative; top: 10px;">View HOT Tasking Manager projects!
+              </button> -->
+              <!-- https://tasks.hotosm.org/contribute?difficulty=ALL&text=mapswipe -->
+              <button id="facebook_btn" onclick = "share_facebook()" class = "socialButton btn btn-primary ">
+                <i class="fa fa fa-facebook" aria-hidden="true" style="position: absolute; bottom: 5px; right: 10px;"></i>
+              </button>
+              <button id="twitter_btn" onclick = "share_twitter()" class = "socialButton btn btn-primary ">
+                <i class="fa fa fa-twitter" aria-hidden="true" style="position: absolute; top: 5px; right: 7px;"></i>
+              </button>
+            </div>
+
+        </div>
+		</div>
+		<div class="col-md-12" id="leaflet_map" style="height: calc(100vH - 92px); overflow: hidden; z-index: 1200; position: relative; top: -20px;">
+      <div id = "buttons_left" style = "position: relative; top: 90px; left: -5px; width: 50px; z-index: 997">
+
+        <div  style="padding-bottom: 0px; padding-left: 0px; position: relative; left: 0px;  z-index: 997">
+          <div id = "show_details_btn">
+          <button   onclick="showAnalyticsDiv()" class="btn btn-lg" style="background-color: white; display: block; height: 26px; width: 26px; box-shadow: 0 0 15px rgba(0,0,0,0.2); z-index: 997;">
+            <i class="fa fa-info" aria-hidden="true" style="position: relative; top: -8px; right: 3px;"></i>
+          </div>
+          </button>
+
+          <div id="show_legend_btn" style=" display: none">
+            <button  onclick="showLegend()" class="btn btn-lg"  style="background-color: white; position: relative; top: 5px; height: 30px; width: 15px; z-index: 997;">
+              <i class="fa fa-th-list" aria-hidden="true" style="position: relative; top: -8px; right: 9px;"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+  <div   id = "legendBox" class = "infoBox" style = "position: absolute; bottom: 0px; left: 0px;   z-index: 1000;">
+    <h4>  Legend </h4>
+      <i onclick="hideLegend()" class=" btn fa fa-times" aria-hidden="true" style="position: absolute; top: 5px; right: 5px;"></i>
+    <!-- </button> -->
+    <div id = "Yes Proportion" class = "legend">
+     Yes Proportion <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #00FF00"></i> Full Agreement (0.8 - 1.0) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #8DFF00"></i> Substantial Agreement (0.6 - 0.8) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #ffff0d"></i> Moderate Agreement (0.4 - 0.6) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #e8850c"></i> Fair Agreement (0.2 - 0.4) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #ff0000"></i> Less than Fair Agreement ( < 0.2) <br>
+    </div>
+    <div  id = "Bad Imagery Count" class = "legend">
+      Bad Imagery Count <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #ff8080"></i> 1 <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #e60000"></i> 2 <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #800000"></i> &ge;3 <br>
+    </div>
+    <div  id = "Agreement" class = "legend">
+      Agreement (Scott's Pi) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #00FF00"></i> Full Agreement (0.8 - 1.0) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #8DFF00"></i> Substantial Agreement (0.6 - 0.8) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #FFFF0D"></i> Moderate Agreement (0.4 - 0.6) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #E8850C"></i> Fair Agreement (0.2 - 0.4) <br>
+      <i  class="fa fa-square" aria-hidden="true" style="color: #ff5000"></i> Less than Fair Agreement ( < 0.2) <br>
+
+    </div>
+     <div id = "active" class = "legend" style = "display: block">
+      <span id="active_badge" class="badge" style = "background-color: orange; background-opacity: 0.7; border: 1px solid black;">0</span>&nbsp &nbspActive Projects
+    </div>
+    <div id = "finished" class = "legend" style = "display: block">
+      <span id="finished_badge" class="badge" style = "background-color: blue; border: 1px solid white;" >0</span> Finished Projects
+    </div>
+
+
+  <!-- </div class="leaflet-control">
+  <button class = "btn" id = "showAttrib" onclick = "hideAttrib()" style="display: block; position: absolute;  bottom: 0px; right: 0px;  z-index: 997;"> <i>>></i></button>
+
+  <button class = "btn" id = "showAttrib" onclick = "showAttrib()" style="display: none; position: absolute;  bottom: 0px; right: 0px;  z-index: 997;"> <i><<</i></button> -->
+  </div>
+ </div>
+
+<div id = "contribute" style="display: none; padding: 10px;">
+  <h2>What next?</h2>
+  <p>For most projects, Mapswipe is the first stage of creating detailed maps as part of the
+    <a target="_blank" href="http://www.missingmaps.org/">Missing Maps Project</a>. <br>
+     It reveals where building and roads are, so that volunteers can then trace them into<br>
+     <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a>.<br>
+     Humanitarian agencies use these maps to plan risk reduction and disaster response activities that save lives.
+  </p>
+  <br>
+  <br>
+  <h2>Want to join?</h2>
+  <div>
+    <div class="col-md-6">
+      <h4>New Mapper?</h4>
+      If you're a beginner, you can learn how to map <a target="_blank" href="http://www.missingmaps.org/learn/">here</a>.
+      <br>
+      You can also <a target="_blank" href="http://www.missingmaps.org/events/">come to a mapathon</a>.
+    </div>
+    <div class="col-md-6">
+      <h4>Existing mapper?</h4>
+      If you know what you are doing, just go to this <br>
+      <a  target="_blank" href="http://tasks.hotosm.org/contribute?difficulty=ALL&text=mapswipe">
+        list of current MapSwipe projects</a> <br>
+         in the HOT Tasking Manager and start mapping.
+    </div>
+
+    <p style="position: relative; top: 100px;"> You can also <a href="https://www.hotosm.org/donate" target="_blank">help with a donation</a> to the Humaitarian OpenStreetMap Team
+  </div>
+</div>
+
+    </body>
+</html>

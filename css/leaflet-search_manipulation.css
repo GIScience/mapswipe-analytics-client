@@ -1,0 +1,26 @@
+.search-tooltip{
+width: 280px;
+}
+
+.search-cancel{
+  position: absolute;
+  top: 8px;
+  left: 305px;  /* searchbar.width+20*/
+}
+
+
+
+table, th, td {
+    /*border: 1px solid black;*/
+}
+
+.int{
+  text-align: right;
+}
+.float3{
+  text-align: right;
+}
+
+.background_img2 {
+  -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.2)), to(rgba(0,0,0,0)))
+}

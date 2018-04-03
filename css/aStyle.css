@@ -1,0 +1,219 @@
+/*manual styling*/
+
+.search-tooltip{
+width: 380px;
+}
+
+.search-cancel{
+  position: absolute;
+  top: 8px;
+  left: 405px;  /* searchbar.width+20*/
+}
+
+
+
+table, th, td {
+    /*border: 1px solid black;*/
+}
+
+.int{
+  text-align: right;
+}
+.float3{
+  text-align: right;
+}
+
+.background_img2 {
+  -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.2)), to(rgba(0,0,0,0)))
+}
+
+.leftButton {
+  width: 35px;
+  height: 35px;
+}
+.socialButton{
+  position: relative;
+  right: -10px;
+  top: 10px;
+  height: 26px;
+  width: 30px;
+
+}
+
+
+/*style for surrounding div in index.html*/
+
+.fa-square {
+  opacity: 0.7;
+}
+
+
+
+/*for legend and buttoms in map*/
+
+.legend {
+  display: none;
+  padding: 3px;
+  border-top: 1px solid LightGrey;
+  font-size: 16px;
+  line-height: 95%;
+  /*border-bottom: 1px dashed black;*/
+  /*border: black solid 1px;*/
+}
+
+.legend h5 {
+  font-size: 16px;
+  line-height: 95%;*
+}
+
+.infoBox {
+    line-height: 18px;
+    color: #555;
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.legend2 i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+  }
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+
+/*Style for the tabs in the analytics div*/
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #eee;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+.tablinks {
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+.imgDump {
+  width: 140px;
+  height: auto;
+  padding: 5px;
+  display: block;
+  margin: auto;
+}
+.app {
+  display: block;
+  margin: auto;
+}
+
+table#downloadSelect th, table#downloadSelect td {
+  padding: 15px;
+  line-height: 2.0;
+}
+
+table tr:nth-child(odd) {
+    background-color: #eee;
+}
+table tr:nth-child(even) {
+    background-color: #fff;
+}
+
+
+
+table caption {
+  color: black;
+}
+.statTable td {
+  /*border: 1px solid black;*/
+  width: 75%;
+  font-size: medium;
+}
+.statTable caption {
+  font-size: large;
+}
+
+
+.tableImg{
+  height: 30px;
+  width: 30px;
+}
+
+
+.fancy {
+  line-height: 0.5;
+  text-align: center;
+}
+.fancy span {
+  display: inline-block;
+  position: relative;
+  content: "";
+  height: 5px;
+  border-top: 1px solid lightgrey;
+  top: 0;
+  width: 100%;
+}
+
+.leaflet-right {
+  width: 40%;
+}
+
+#contribute{
+  text-align: center;
+}
+/*To place a hide botton between the attributions and the edge of the page*/
+/*.leaflet-control-attribution{
+  position: relative;
+  bottom: 0px;
+  right: 45px;
+}*/
+
+
+.background_img {
+  -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.8)), to(rgba(0,0,0,0)))
+}
+
+.navbar {
+margin-bottom: 0px;
+padding-top: 10px;
+padding-bottom: 10px
+}
