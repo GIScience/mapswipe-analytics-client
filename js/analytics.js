@@ -222,7 +222,7 @@ function setAnalyticsDiv(feature){
     // document.getElementById("hide_details_btn").style.display = 'inline'
     if ((feature.properties.progress < 100) && (feature.properties.state == 0)) {
       var featureState = 'active'.fontcolor('orange')
-    } else if ((feature.properties.progress < 100) && (feature.properties.state == 3)){
+    } else if ((feature.properties.progress < 98) && (feature.properties.state == 3)){
       var featureState = 'paused'
      }
     else {
@@ -333,7 +333,7 @@ function setAnalyticsDiv(feature){
         if ((feature.properties.progress < 100) && (feature.properties.state == 0) ){
           return L.circleMarker(latlng, geojsonMarkerOptions_yellow_active)
         }
-        if ((feature.properties.progress < 100) && (feature.properties.state == 3) ){
+        if ((feature.properties.progress < 98) && (feature.properties.state == 3) ){
           return L.circleMarker(latlng, geojsonMarkerOptions_yellow_not_active)
           //return {}
         }
@@ -372,7 +372,7 @@ function setAnalyticsDiv(feature){
               if (feature.properties.id == project_id){
                 return {weight: 3, color: 'black', fill: false}
               }
-              else if ((feature.properties.progress < 100) && (feature.properties.state == 3) ){
+              else if ((feature.properties.progress < 98) && (feature.properties.state == 3) ){
                 return {weight: 0, fill: false}
               }
               else if ((feature.properties.progress < 100) && (feature.properties.state == 0) ){
@@ -404,7 +404,7 @@ function setAnalyticsDiv(feature){
            row_content = '<td>'+featureId+'</td><td>'+featureName+'</td><td>'+featureState+'</td><td>'+featureProgress+'</td><td>'+featureContributors+'</td><td>'+featureObjects+'</td><td><a href="http://mapswipe.heigit.org/processing/data/'+featureId+'/">Download</a></td><td>'+timestamp+'</td>'
            row.innerHTML = row_content
          }
-         else if ((feature.properties.progress < 100) && (feature.properties.state == 3)){
+         else if ((feature.properties.progress < 98) && (feature.properties.state == 3)){
           var featureState = 'paused'
          }
          else {
@@ -436,7 +436,7 @@ function setAnalyticsDiv(feature){
           console.log('project id match')
           return {weight: 3, color: 'black', fill: false}
         }
-        else if ((feature.properties.progress < 100) && (feature.properties.state == 3) ){
+        else if ((feature.properties.progress < 98) && (feature.properties.state == 3) ){
           return {weight: 0, fill: false}
         }
         else if ((feature.properties.progress < 100) && (feature.properties.state == 0) ){
@@ -472,7 +472,7 @@ function setAnalyticsDiv(feature){
               if (feature.properties.id == project_id){ //selected project
                 return {weight: 3, color: 'black', fill: false}
               }
-              else if ((feature.properties.progress < 100) && (feature.properties.state == 3) ){
+              else if ((feature.properties.progress < 98) && (feature.properties.state == 3) ){
                 return {weight: 0, fill: false}
               }
               else if ((feature.properties.progress < 100) && (feature.properties.state == 0) ){ //active project
@@ -523,7 +523,7 @@ function setAnalyticsDiv(feature){
             if (feature.properties.id == project_id){
               return {weight: 3, color: 'black', fill: false}
             }
-            else if ((feature.properties.progress < 100) && (feature.properties.state == 3) ){
+            else if ((feature.properties.progress < 98) && (feature.properties.state == 3) ){
               return {weight: 0, fill: false}
             }
             else if ((feature.properties.progress < 100) && (feature.properties.state == 0) ){
@@ -700,7 +700,7 @@ function createBaseLayers() {
           if (feature.properties.id == project_id){
             return {weight: 3, color: 'black', fill: false}
           }
-          else if ((feature.properties.progress < 100) && (feature.properties.state == 3) ){
+          else if ((feature.properties.progress < 98) && (feature.properties.state == 3) ){
             return {weight: 0, fill: false}
           }
           else if ((feature.properties.progress < 100) && (feature.properties.state == 0) ){
