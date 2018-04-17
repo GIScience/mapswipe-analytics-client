@@ -1,5 +1,5 @@
 ## Idea:
-[MapSwipeAnalytics](http://mapswipe.heigit/analytics/) is a website that brings together everything related to MapSwipe projects. 
+[MapSwipeAnalytics](http://mapswipe.heigit.org/analytics/) is a website that brings together everything related to MapSwipe projects.
 
 This includes a visualisation of the results (e.g. settlement layer), but also additional characteristics like agreement among volunteers, which is an important indicator for quality. Furthermore, you can monitor the progress of individual MapSwipe projects.
 
