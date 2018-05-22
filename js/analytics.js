@@ -159,11 +159,7 @@ function addTileLayers(project_id){
 
 // test: store the current project in a global variable;
 var cur_project;
-//adjusts the legend to the shown layer
-// function setLegend(style) {
-//   document.getElementById("legend").style.display = 'block';
-//   document.getElementById("legend").src = "http://mapswipe-backend.geog.uni-heidelberg.de:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=final_1&STYLE=" + style;
-// }
+
 function showAnalyticsDiv(){
   document.getElementById("leaflet_map").className = 'col-md-8'
   $('#analytics').show(300)//"slide", {direction: "right" }, 1000);
@@ -173,16 +169,13 @@ function showAnalyticsDiv(){
 }
 
 function hideLegend(){
-  //TO DO: hide/ show legend, important for mobile!
   document.getElementById("legendBox").style.display = 'none';
   document.getElementById("show_legend_btn").style.display = 'block';
-
 }
 
 function showLegend(){
   document.getElementById("legendBox").style.display = 'block';
   document.getElementById("show_legend_btn").style.display = 'none';
-
 }
 
 function hideAnalyticsDiv(){
@@ -670,16 +663,59 @@ function createBaseLayers() {
       window.onpopstate = function(event) {
         console.log(project_id);
 
-
+        // this should be the default view
         if(event.state == null) {
+
+          //set main divs
           document.getElementById("projectDetails").style.display = 'none';
           document.getElementById("overallStats").style.display = 'block';
           document.getElementById("About").style.display = "block";
           document.getElementById("about_tab").className += " active";
+
+          //adjust layers and legend (including removal of result layer)
+          console.log("Returned to start");
+          //reset layers
+          polygon_layer.setStyle (
+            function (feature) { //might be easier if accessed over old and new id only instead of loop trough all
+              if ((feature.properties.progress < 98) && (feature.properties.state == 3) ){
+                return {weight: 0, fill: false};
+              }
+              else if ((feature.properties.progress < 100) && (feature.properties.state == 0) ){
+                return { color: 'black', weight: 2, fill: true, fillColor: 'orange', fillOpacity: 0.5 };
+              }
+              else {
+                return { color: 'white', weight: 2, fill: true ,fillColor: 'blue', fillOpacity: 0.5 };
+                }
+              }
+              );
+              //remove result layers
+              //this might be done with addTileLayers
+              map.removeLayer(msiLayer);
+              map.removeLayer(BadLayer);
+              map.removeLayer(AgreementLayer);
+              mapControl.removeLayer(msiLayer);
+              mapControl.removeLayer(BadLayer);
+              mapControl.removeLayer(AgreementLayer);
+              mapControl._overlaysList.onchange();
+
+              //adjust legend
+              document.getElementById('Yes Proportion').style.display = 'none';
+              document.getElementById('Bad Imagery Count').style.display = 'none';
+              document.getElementById('Agreement').style.display = 'none';
+
+
+
+
+
+
+
           map.setZoom(3);
           map.setView([0, 0]);
 
+
+
         } else {
+          //when not on the starting page, p. e. on a project
         console.log(project_id);
         var layer;
         //get the right layer
