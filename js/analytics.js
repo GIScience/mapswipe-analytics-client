@@ -702,17 +702,8 @@ function createBaseLayers() {
               document.getElementById('Yes Proportion').style.display = 'none';
               document.getElementById('Bad Imagery Count').style.display = 'none';
               document.getElementById('Agreement').style.display = 'none';
-
-
-
-
-
-
-
-          map.setZoom(3);
-          map.setView([0, 0]);
-
-
+              map.setZoom(3);
+              map.setView([0, 0]);
 
         } else {
           //when not on the starting page, p. e. on a project
