@@ -600,7 +600,7 @@ function createBaseLayers() {
       $.ajax({
         'async': false,
         'global': true,
-        'url': 'data/overall_stats.json',
+        'url': 'data/stats_general.json',
         'dataType': "json",
         'success': function (data) {
             stats = data;
