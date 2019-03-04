@@ -553,7 +553,7 @@ function setAnalyticsDiv(feature){
 function createBaseLayers() {
       //var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
       //var osmUrl='http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}';
-      var osmUrl='https://api.openrouteservice.org/mapsurfer/{z}/{x}/{y}.png?api_key=58d904a497c67e00015b45fcfb6cfd7081a846ddbfa1cb9e82bed7a0';
+      var osmUrl='https://maps.heigit.org/openmapsurfer/tiles/roads/webmercator/{z}/{x}/{y}.png';
       var osmAttrib='Map data © <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, tiles <a target="_blank" href="http://www.geog.uni-heidelberg.de/gis/index_en.html">GIScience Research Group @ Heidelberg University</a>';
       osm = new L.TileLayer(osmUrl, {attribution: osmAttrib});
 
