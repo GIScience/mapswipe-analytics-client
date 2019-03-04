@@ -555,6 +555,7 @@ function createBaseLayers() {
       //var osmUrl='http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}';
       var osmUrl='https://maps.heigit.org/openmapsurfer/tiles/roads/webmercator/{z}/{x}/{y}.png';
       var osmAttrib='Map data © <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, tiles <a target="_blank" href="http://www.geog.uni-heidelberg.de/gis/index_en.html">GIScience Research Group @ Heidelberg University</a>';
+
       osm = new L.TileLayer(osmUrl, {attribution: osmAttrib});
 
       //var osmGreyUrl = 'https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}';
@@ -602,7 +603,7 @@ function createBaseLayers() {
       $.ajax({
         'async': false,
         'global': true,
-        'url': 'data/overall_stats.json',
+        'url': 'data/stats_general.json',
         'dataType': "json",
         'success': function (data) {
             stats = data;
@@ -763,7 +764,7 @@ function createBaseLayers() {
           msg = "Explore the results of #MapSwipe crowdmapping project" + cur_project.properties.name + ":";
         } else {
           msg = "Explore resutls of #MapSwipe, the humanitarian crowdmapping app:";
-        }        window.open("http://www.facebook.com/sharer.php?u=" + window.location.href + "/&t=" + msg);
+        }        window.open("https://www.facebook.com/sharer.php?u=" + window.location.href + "/&t=" + msg);
 
       }
 
