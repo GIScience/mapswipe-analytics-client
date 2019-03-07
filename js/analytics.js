@@ -117,7 +117,7 @@ function addTileLayers(project_id){
     mapControl.removeLayer(BadLayer);
     mapControl.removeLayer(AgreementLayer);
     }
-  msiLayer = new L.tileLayer.wms('http://mapswipe-backend.geog.uni-heidelberg.de:8080/geoserver/ms_layers/wms?&tiled=true', {
+  msiLayer = new L.tileLayer.wms('http://mapswipe.heigit.org:8080/geoserver/ms_layers/wms?&tiled=true', {
     layers: layer_name,
     styles: 'msi',
     format: 'image/png',
@@ -125,7 +125,7 @@ function addTileLayers(project_id){
     opacity: 0.7
   }).addTo(map);
 
-  BadLayer = new L.tileLayer.wms('http://mapswipe-backend.geog.uni-heidelberg.de:8080/geoserver/ms_layers/wms?&tiled=true', {
+  BadLayer = new L.tileLayer.wms('http://mapswipe.heigit.org:8080/geoserver/ms_layers/wms?&tiled=true', {
     layers: layer_name,
     styles: 'bad_count',
     format: 'image/png',
@@ -133,7 +133,7 @@ function addTileLayers(project_id){
     opacity: 0.7
   })//.addTo(map);
 
-  AgreementLayer = new L.tileLayer.wms('http://mapswipe-backend.geog.uni-heidelberg.de:8080/geoserver/ms_layers/wms?&tiled=true', {
+  AgreementLayer = new L.tileLayer.wms('http://mapswipe.heigit.org:8080/geoserver/ms_layers/wms?&tiled=true', {
     layers: layer_name,
     styles: 'agreement',
     format: 'image/png',
