@@ -551,12 +551,15 @@ function setAnalyticsDiv(feature){
 
 //Loads baselayers (Korona OSM, Korona OSM Greyscale, Bin Imagery), adds them to map and mapControl
 function createBaseLayers() {
-      //var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-      var osmUrl='https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}';
-      var osmAttrib='Map data © <a target="_blank" href="https://openstreetmap.org">OpenStreetMap</a> contributors, tiles <a target="_blank" href="https://www.geog.uni-heidelberg.de/gis/index_en.html">GIScience Research Group @ Heidelberg University</a>';
+      //var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+      //var osmUrl='http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}';
+      var osmUrl='https://maps.heigit.org/openmapsurfer/tiles/roads/webmercator/{z}/{x}/{y}.png';
+      var osmAttrib='Map data © <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, tiles <a target="_blank" href="http://www.geog.uni-heidelberg.de/gis/index_en.html">GIScience Research Group @ Heidelberg University</a>';
+
       osm = new L.TileLayer(osmUrl, {attribution: osmAttrib});
 
-      var osmGreyUrl = 'https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}';
+      //var osmGreyUrl = 'https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}';
+      osmGreyUrl = 'http://a.tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
       osmGrey = new L.TileLayer(osmGreyUrl, {attribution: osmAttrib});
       map.addLayer(osm);
 
