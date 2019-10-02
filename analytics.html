@@ -3,8 +3,8 @@
 <html>
 
 <head>
-  <title>MapSwipe | Every swipe helps put families on the map</title>
-  
+  <title>Analytics | MapSwipe</title>
+
   <!-- Start Component -->
   <meta charset="utf-8">
 
@@ -23,6 +23,20 @@
 <link rel="apple-touch-icon" href="assets/img/logos/mapswipe_logo_only_256x256.png">
 
 <link rel="canonical" href="https://mapswipe.org/index.html">
+
+<!-- Add jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin=""></script>
+
+<!-- Add Bootstrap -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- Google Tag Manager -->
  <script>
@@ -48,7 +62,7 @@
 
 </head>
 
-<body class="page-home">
+<body class="page-data" onload="initMap()">
 
   <!-- Start Component -->
   <!-- Google Tag Manager (noscript) -->
@@ -58,81 +72,82 @@
 <!-- End Google Tag Manager (noscript) -->
   <!-- End Component -->
 
-  <!-- Start Component -->
   <header>
-  <div class="wrapper">
-    <div class="container">
-      <a class="mapswipe-logo" href="index.html">
-        <img class="logo" src="assets/img/svg/mapswipe-white.svg">
-      </a>
-      <div class="mobile-menu hidden">
-        <div class="burger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <nav class="nav-menu" role="navigation">
-        <div>
-          <a class="navlink" href="get-involved.html">Get involved</a>
-          <a class="navlink" href="data.html">Data</a>
-          <a class="navlink" href="about.html">About</a>
-        </div>
-      </nav>
-    </div>
-  </div>
-</header>
-  <!-- End Component -->
-
-  <div class="hero-container">
     <div class="wrapper">
-      <div class="hero-content">
-        <h1 class="hero-heading">Swipe and tap.<br>Put communities on the map.</h1>
-        <p class="hero-subheading">Help humanitarians find and help vulnerable people. Download MapSwipe.</p>
-        <div class="appstore-container">
-          <a class="appstore-link" href="https://itunes.apple.com/us/app/mapswipe/id1133855392?ls=1&amp;mt=8" target="_blank">
-            <img height="60" src="assets/img/svg/app-store-dark.svg">
-          </a>
-          <a class="appstore-link last" href="https://play.google.com/store/apps/details?id=org.missingmaps.mapswipe" target="_blank">
-            <img height="60" src="assets/img/svg/google-play-dark.svg">
-          </a>
+      <div class="container">
+        <a class="mapswipe-logo" href="index.html">
+          <img class="logo" src="assets/img/svg/mapswipe-white.svg">
+        </a>
+        <div class="mobile-menu hidden">
+          <div class="burger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
+        <nav class="nav-menu" role="navigation">
+          <div>
+            <a class="navlink" href="get-involved.html">Get involved</a>
+            <a class="navlink" href="data.html">Data</a>
+            <a class="navlink active" href="analytics.html">Analytics</a>
+            <a class="navlink" href="about.html">About</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="section-container">
+      <h2>MapSwipe Analytics</h2>
+      <div class="rich-text">
+        <p>Swiping with MapSwipe is just the beginning. Access a full suite of tools to help you understand where in the
+          world MapSwipe projects are underway and how MapSwipers are making contributions to OpenStreetMap. <a
+            href="https://mapswipe.heigit.org/" target="_blank">See all of the analytics tools here.</a></p>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-container section-flex image-right">
-      <div class="two-thirds">
-        <h2>More than 29,000 volunteers engaged.<br>
-            With over 600,000 sq km swiped.<br>
-            Across 29 countries.</h2>
-
-        <p>Around the world, millions of individuals are affected by disasters, disease, and conflict. First responders working with these communities often have to cover large areas, but lack the data necessary for an efficient, effective response. Through MapSwipe, volunteers pinpoint where critical infrastructure and populations are located, allowing mappers to focus only on areas where they know features need to be mapped.</p>
-
-        <p><strong>With your mobile phone, you can play a part in helping communities around the world, one swipe at a time.</strong></p>
-
-        <a class="link" href="about.html"><!-- Start Component -->
-          <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.48936 1L1 2.4L8.02371 9L1 15.6L2.48936 17L11 9L2.48936 1Z" stroke-width="0.942857"/>
-</svg>
-  
-          <!-- End Component -->Learn more</a>
-          <a class="link" href="get-involved.html"><!-- Start Component -->
-          <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.48936 1L1 2.4L8.02371 9L1 15.6L2.48936 17L11 9L2.48936 1Z" stroke-width="0.942857"/>
-</svg>
-  
-          <!-- End Component -->Get involved</a>
+    <div class="section-container">
+      <h2>Map</h2>
+      <div class="rich-text">
+        <p>Swiping with MapSwipe is just the beginning. Access a full suite of tools to help you understand where in the
+          world MapSwipe projects are underway and how MapSwipers are making contributions to OpenStreetMap. <a
+            href="https://mapswipe.heigit.org/" target="_blank">See all of the analytics tools here.</a></p>
       </div>
-      <div class="one-third">
-        <img src="assets/img/iphone.png">
+      <div id="map">
+        <!-- map container -->
       </div>
     </div>
   </div>
+
+  <div class="section">
+    <div class="section-container">
+      <h2>Table</h2>
+      <div class="rich-text">
+        <p>Swiping with MapSwipe is just the beginning. Access a full suite of tools to help you understand where in the
+          world MapSwipe projects are underway and how MapSwipers are making contributions to OpenStreetMap. <a
+            href="https://mapswipe.heigit.org/" target="_blank">See all of the analytics tools here.</a></p>
+      </div>
+      <input type="text" id="projectsTableFilter" onkeyup="filterTable()" placeholder="Search projects..">
+      <table id="projectsTable" class="table table-striped table-hover">
+          <tr class="thead-inverse">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Project Type</th>
+            <th>Look for</th>
+            <th>Progress</th>
+            <th>Contributors</th>
+            <th>Status</th>
+          </tr>
+        </table>
+    </div>
+  </div>
+
 
   <!-- Start Component -->
   <div class="prefooter">
@@ -209,7 +224,7 @@
             <svg width="35" height="26" viewBox="0 0 35 26" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M2.99997 0H31.1333C32.7854 0 34.1333 1.3464 34.1333 3V23C34.1333 24.648 32.7914 26 31.1333 26H2.99997C1.35197 26 -3.43323e-05 24.6581 -3.43323e-05 23V3C-3.43323e-05 1.352 1.34183 0 2.99997 0ZM3.41423 2L17.003 15.5889L30.7094 2H3.41423ZM32.1333 22.5859V3.4046L22.5014 12.9539L32.1333 22.5859ZM30.7191 24L21.0811 14.362L17.704 17.7101C17.313 18.0977 16.6822 18.0965 16.2928 17.7071L13 14.4142L3.41417 24H30.7191ZM1.99997 22.5858L11.5858 13L1.99997 3.41413V22.5858Z" fill="white"/>
 </svg>
-  
+
             <!-- End Component -->
           </a>
         </div>
@@ -231,8 +246,10 @@
 </footer>
 
 <script async defer src="assets/js/index.js"></script>
+<script async defer src="assets/js/analytics.js"></script>
 
   <!-- End Component -->
+
 </body>
 
 </html>
