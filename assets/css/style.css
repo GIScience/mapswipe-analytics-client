@@ -961,9 +961,16 @@ header {
 /* styles for map */
 #map {
   height: 350px;
+  z-index: 2;
 }
 
 /* styles for projects table */
 #projectsTable {
   width: 100%;
+}
+
+.paginate_button {
+  border: 1px solid #dee2e6;
+  height: 18px;
+  padding: 0.5rem 0.75rem;
 }
