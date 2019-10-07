@@ -78,6 +78,8 @@ function initAnalyticsProject() {
     {"name":"Bad Imagery Results", "description":"This dataset contains all results where at least one mapswipe user submitted a bad_image classification and no other classifications are more frequently submitted. The output dataset depicts the union of all selected results.", "datatype":"geoJSON"},
     {"name":"HOT Tasking Manager Geometries", "description":"This dataset contains shapes that are ready to use in the HOT Tasking Manager. Currently, the geometries consist of maximum 15 MapSwipe Tasks, where at least one user indicated the presence of a building. The filter criteria and size of the tasks can be adapted on request.", "datatype":"geoJSON"},
     {"name":"Progress and Contributors by date", "description":"Number of contributors and project progress on a daily basis.", "datatype":"CSV"},
+    {"name":"QGIS style total results count", "description":"You can use this file to set the symbology of your results data in QGIS", "datatype":"QML"},
+    {"name":"QGIS style yes results share", "description":"You can use this file to set the symbology of your results data in QGIS", "datatype":"QML"},
   ]
 
   initProjectMap();
