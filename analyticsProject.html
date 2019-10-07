@@ -149,15 +149,25 @@ crossorigin=""></script>
 
   <div class="section">
     <div class="section-container">
-      <h2>Project Data</h2>
+      <h2>Download Data</h2>
       <div class="rich-text">
         <p>Swiping with MapSwipe is just the beginning. Access a full suite of tools to help you understand where in the
           world MapSwipe projects are underway and how MapSwipers are making contributions to OpenStreetMap. <a
             href="https://mapswipe.heigit.org/" target="_blank">See all of the analytics tools here.</a></p>
       </div>
-      <div id="plotlyGraph">
-        <!-- data table container -->
-      </div>
+      <table id="projectDataTable" class="table table-striped table-bordered">
+          <thead>
+            <tr class="thead-inverse">
+              <th>Projec ID</th>
+              <th>Dataset Name</th>
+              <th>Data Type</th>
+              <th>Dataset Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- body of the table will be added by function -->
+          </tbody>
+        </table>
     </div>
   </div>
 
