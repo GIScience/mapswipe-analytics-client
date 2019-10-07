@@ -14,7 +14,7 @@ function initMap() {
   setTimeout(function(){ map.invalidateSize()}, 400);
 
   addGeojsonLayer(projectCentroidsUrl, projectCentroidsLayer);
-  addGeojsonLayer(projectGeometriesUrl, projectGeometriesLayer);
+  // addGeojsonLayer(projectGeometriesUrl, projectGeometriesLayer);
   }
 
 function addGeojsonLayer (url, layer) {
@@ -30,7 +30,6 @@ function addGeojsonLayer (url, layer) {
   $.when(geojsonData).done(function() {
     layer.addData(geojsonData.responseJSON);
     map.fitBounds(layer.getBounds());
-    console.log;
     populateProjectsTable(geojsonData.responseJSON);
   })
 }
@@ -38,12 +37,11 @@ function addGeojsonLayer (url, layer) {
 function populateProjectsTable(geojsonData) {
   console.log('added projects')
 
-  var table = document.getElementById('projectsTable')
-  console.log(table)
+  var tableRef = document.getElementById('projectsTable').getElementsByTagName('tbody')[0];
 
   geojsonData.features.forEach(function(element) {
-    console.log(element);
-    tr = table.insertRow(1);
+
+    tr = tableRef.insertRow();
 
     td = document.createElement('td')
     td.innerHTML = element.properties.project_id
@@ -53,4 +51,8 @@ function populateProjectsTable(geojsonData) {
     td.innerHTML = element.properties.name
     tr.appendChild(td)
   })
+
+  $('#projectsTable').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+
 }

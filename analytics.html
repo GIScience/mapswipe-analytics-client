@@ -38,6 +38,12 @@ crossorigin=""></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- Add Data Tables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
 <!-- Google Tag Manager -->
  <script>
   (function (w, d, s, l, i) {
@@ -133,17 +139,16 @@ crossorigin=""></script>
           world MapSwipe projects are underway and how MapSwipers are making contributions to OpenStreetMap. <a
             href="https://mapswipe.heigit.org/" target="_blank">See all of the analytics tools here.</a></p>
       </div>
-      <input type="text" id="projectsTableFilter" onkeyup="filterTable()" placeholder="Search projects..">
-      <table id="projectsTable" class="table table-striped table-hover">
-          <tr class="thead-inverse">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Project Type</th>
-            <th>Look for</th>
-            <th>Progress</th>
-            <th>Contributors</th>
-            <th>Status</th>
-          </tr>
+      <table id="projectsTable" class="table table-striped table-bordered">
+          <thead>
+            <tr class="thead-inverse">
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- body of the table will be added by function -->
+          </tbody>
         </table>
     </div>
   </div>

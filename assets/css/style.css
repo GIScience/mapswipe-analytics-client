@@ -174,10 +174,12 @@ img {
   vertical-align: middle;
   display: inline-block; }
 
+/*
 table td:first-child {
   font-weight: bold;
   padding-right: 20px;
   vertical-align: top; }
+*/
 
 hr {
   display: block;
